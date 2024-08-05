@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
 import { POKEMONS } from './mock-pokemon-list';
 import { Pokemon } from './pokemon';
+import { BorderCardDirective } from './border-card.directive';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],  // Added CommonModule here
+  imports: [RouterOutlet, CommonModule, BorderCardDirective], 
   templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -18,15 +19,8 @@ export class AppComponent implements OnInit {
     console.table(this.pokemonList);
   }
 
-  selectPokemon(pokemonId: string) {
-    const pokemon: Pokemon | undefined = this.pokemonList.find(pokemon => pokemon.id == +pokemonId);
-
-    if (pokemon) {
-      console.log(`vous avez cliqué sur le pokemon ${pokemon.name}`);
-      this.pokemonSelected = pokemon;
-    } else {
-      console.log(`vous avez demandé un pokemon qui n'existe pas`);
-      this.pokemonSelected = pokemon;
-    }
+  selectPokemon(pokemon: Pokemon) {
+    console.log(`vous avez cliqué sur le pokemon ${pokemon.name}`);
+    this.pokemonSelected = pokemon;
   }
 }
